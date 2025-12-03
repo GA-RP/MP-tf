@@ -1,21 +1,21 @@
 //class BootScreen que implementa a interface Screen
 class BootScreen implements Screen {
 
-  SoundFile bootSound;
+  SoundFile alarmSound;
 
   boolean bootStarted = false;
   // tamanho da fonte relativo ao ecrã
   float fontSize = min(width, height) * 0.06;
 
-  BootScreen(SoundFile bootSound) {
+  BootScreen(SoundFile alarmSound) {
 
-    this.bootSound = bootSound;
+    this.alarmSound = alarmSound;
   }
 
   public void update() {
     // if comecçou o boot + o som terminou passar para o DesktopScreen
-    if (bootStarted && !bootSound.isPlaying()) {
-      currentScreen = new DesktopScreen();
+    if (bootStarted && !alarmSound.isPlaying()) {
+    currentScreen = new WakeUpScreen(wake_up);
     }
   }
 
@@ -29,13 +29,13 @@ class BootScreen implements Screen {
     // tamanho da fonte relativo ao ecrã
     textSize(fontSize);
 
-    text("CLICK TO BOOT", width / 2, height / 2);
+    text("WAKE UP", width / 2, height / 2);
   }
 
   public void handleMousePressed() {
     if (!bootStarted) {
       bootStarted = true;
-      bootSound.play();  // toca o som uma vez
+      alarmSound.play();  // toca o som uma vez
     }
   }
 }
