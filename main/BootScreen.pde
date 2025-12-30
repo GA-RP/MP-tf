@@ -1,102 +1,99 @@
 //class BootScreen que implementa a interface Screen
+//este ecrã representa o estado inicial do projeto
 class BootScreen implements Screen {
 
-  SoundFile alarmSound;
-
-  boolean bootStarted = false;
-  // tamanho da fonte relativo ao ecrã
-  float fontSize = min(width, height) * 0.06;
+  SoundFile alarmSound;  //variável que guarda o som do alarmSound
   
-  // int steps do progresso
-  int step = 0;
+  boolean bootStarted = false;  //indica se o processo de "acordar" começou
+  float fontSize = min(width, height) * 0.06;  //tamanho do texto relativo ao ecrã
   
-  // posição da opção atual
-  float ox, oy;
+  int step = 0;  //variável do progresso dos steps
+  
+  float ox, oy;  //coordenadas X e Y do texto interativo
 
+  //construtor do BootScreen
   BootScreen(SoundFile alarmSound) {
-    this.alarmSound = alarmSound;
-    randomizeOptionPos();
+    this.alarmSound = alarmSound; //associa o som recebido à variável local
+    randomizeOptionPos(); //randomize a posição inicial para o texto
   }
 
   public void update() {
-    // if comecçou o boot + o som terminou passar para o WakeUpScreen
+    //verifica se o boot já começou e se o som do despertador terminou
     if (bootStarted && !alarmSound.isPlaying()) {
-    currentScreen = new WakeUpScreen(videos[0]);
+      currentScreen = new WakeUpScreen(videos[0]); //quando o alarmSound acaba, passa para o ecrã seguinte (WakeUpScreen)
     }
   }
 
   public void display() {
-    //fundo do ecrâ
-    background(16, 17, 17);
+    background(16, 17, 17);  //fundo do ecrâ
 
-    noStroke();
-    fill(255, 255, 255, 28);
-    ellipse(mouseX, mouseY, 100, 100);
+    //efeito visual no mouse (spotlight)
+    noStroke();  //sem contorno
+    fill(255, 255, 255, 28);  //branco com baixa opacidade
+    ellipse(mouseX, mouseY, 100, 100);  //círculo centrado no rato
 
-    textAlign(CENTER, CENTER);
+    textAlign(CENTER, CENTER);  //texto centrado horizontal e verticalmente
+    
+    String optionText = getOptionText();  //obtém o texto a mostrar, através do step atual
 
-    // opção atual (by dist)
-    String optionText = getOptionText();
+    float radius = 240;  //raio da área de descoberta do texto
+    float a = alphaByDistance(mouseX, mouseY, ox, oy, radius);  //opacidade do texto com base distância do mouse, 0..255
 
-    float radius = 240; // área de descoberta
-    float a = alphaByDistance(mouseX, mouseY, ox, oy, radius); // 0..255
+    fill(255, a); //define a cor do texto com a opacidade variável
 
-    fill(255, a);
+    textSize(fontSize * 0.75);  //define o tamanho do texto
+    text(optionText, ox, oy);  //desenha o texto na posição aleatória
 
-    textSize(fontSize * 0.75);
-    text(optionText, ox, oy);
-
-    // hint
-    fill(255);
-    textSize(fontSize * 0.30);
-    if (!bootStarted) {
-      text("move mouse to explore (use 'R' to reset the experience)", width / 2, height * 0.95);
+    //hint
+    fill(255);  //cor do texto da hint
+    textSize(fontSize * 0.30);  //tamanho do texto (mais pequeno)
+    if (!bootStarted) {  //está visível enquanto o boot n começa
+      text("move mouse to explore (use 'R' to reset the experience)", width / 2, height * 0.95);  //texto da hint, centrado na parte inferior do ecrã
     }
   }
 
   public void handleMousePressed() {
-    // se o alarme já começou, ignorar os clicks do mouse
-    if (bootStarted) return;
+    if (bootStarted) return;  //se o alarme já começou, ignorar os clicks do mouse
 
-    // só avançar se estiver perto da opção (text)
-    float radius = 240;
-    float d = dist(mouseX, mouseY, ox, oy);
-    if (d > radius) return;
+    //só permite a interação se o mouse estiver perto do texto
+    float radius = 240;  //raio de interação
+    float d = dist(mouseX, mouseY, ox, oy);  //dist do mouse ao texto
+    if (d > radius) return;  //se estiver longe, não faz nada
 
-    // step by step
-    if (step < 2) {
-      step++;
-      randomizeOptionPos();
+    //progressão step by step
+    if (step < 2) {  //enquanto não chegar ao último step
+      step++;  //avança para o próximo step
+      randomizeOptionPos();  //gera uma nova posição aleatória para o texto
     } else {
-      // ultimo step: WAKE UP -> toca alarme
-      bootStarted = true;
-      alarmSound.play();  // toca o alarm uma vez
+      //último step: iniciar o processo de boot
+      bootStarted = true;  //marca o boot como iniciado
+      alarmSound.play();  //toca o som do despertador uma vez
     }
   }
   
-  // devolver o text pelo step
+  //devolve o texto correspondente ao step atual
   String getOptionText() {
-    if (step == 0) return "wake up";
-    if (step == 1) return "wake UP";
-    return "WAKE UP";
+    if (step == 0) return "wake up";  //primeiro estado
+    if (step == 1) return "wake UP";  //segundo estado
+    return "WAKE UP";  //estado final
   }
 
+  //gera uma posição aleatória segura para o texto (dentro de uma margem do canva)
   void randomizeOptionPos() {
-    // texto maior, mais margin
-    float marginX = width * 0.18;
-    float marginY = height * 0.18;
+    //margens para evitar que o texto fique demasiado perto das bordas
+    float marginX = width * 0.18; //margem horizontal
+    float marginY = height * 0.18; //margem vertical
 
-    ox = random(marginX, width - marginX);
-    oy = random(marginY, height - marginY);
+    ox = random(marginX, width - marginX); //posição X aleatória dentro da margem "horizontal"
+    oy = random(marginY, height - marginY); //posição Y aleatória dentro da margem "vertical"
 
-    // margin, evitar aparecer perto do hint
-    oy = constrain(oy, marginY, height * 0.82);
+    oy = constrain(oy, marginY, height * 0.82);  //ajuste (evitar sobreposição com o texto da hint)
   }
 
-  // opacidade by dist
+  //calcular opacidade do texto com base na distância do mouse
   float alphaByDistance(float mx, float my, float x, float y, float radius) {
-    float d = dist(mx, my, x, y);
-    float t = 1.0 - constrain(d / radius, 0, 1); // 0..1
-    return 5 + t * 250; // longe quase invisível, perto visível
+    float d = dist(mx, my, x, y);  //distância do mouse ao texto
+    float t = 1.0 - constrain(d / radius, 0, 1);  //normaliza o valor entre 0 e 1 (o texto não ganha opacidade gradualmente fora da área do radius)
+    return 5 + t * 250;  //longe quase invisível, perto praticamente visível
   }
-}
+}  //c
