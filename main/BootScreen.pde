@@ -21,7 +21,7 @@ class BootScreen implements Screen {
   public void update() {
     // if comecçou o boot + o som terminou passar para o WakeUpScreen
     if (bootStarted && !alarmSound.isPlaying()) {
-    currentScreen = new WakeUpScreen(wake_up);
+    currentScreen = new WakeUpScreen(videos[0]);
     }
   }
 
@@ -50,7 +50,7 @@ class BootScreen implements Screen {
     fill(255);
     textSize(fontSize * 0.30);
     if (!bootStarted) {
-      text("move mouse to explore", width / 2, height * 0.95);
+      text("move mouse to explore (use 'R' to reset the experience)", width / 2, height * 0.95);
     }
   }
 

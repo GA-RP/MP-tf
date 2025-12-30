@@ -1,22 +1,34 @@
 //class WakeUpScreen que implementa a interface Screen
 class WakeUpScreen implements Screen {
 
-  Movie wake_up;
+  Movie video;
+  boolean finished = false;
 
-  WakeUpScreen(Movie wake_up) {
-    this.wake_up = wake_up;
-    wake_up.loop();  // ou video.play()
+  WakeUpScreen(Movie video) {
+    this.video = video;
+    video.play();
   }
 
   public void update() {
+    // ao acabar -> passa para o ecrã seguinte
+    if (!finished && video.duration() > 0 && video.time() >= video.duration() - 0.05) {
+      finished = true;
+      video.stop();
+
+      // usa o frame, carregado na main
+      currentScreen = new WakeUpChoiceScreen(frames[0]);
+    }
   }
 
   public void display() {
     background(0);
 
     // fullscreen com proporção
-    float vw = wake_up.width;
-    float vh = wake_up.height;
+    float vw = video.width;
+    float vh = video.height;
+
+    // evita dividir por zero antes do vídeo carregar
+    if (vw <= 0 || vh <= 0) return;
 
     float scaleW = width / vw;
     float scaleH = height / vh;
@@ -28,7 +40,7 @@ class WakeUpScreen implements Screen {
     float x = (width - drawW) / 2;
     float y = (height - drawH) / 2;
 
-    image(wake_up, x, y, drawW, drawH);
+    image(video, x, y, drawW, drawH);
   }
 
   public void handleMousePressed() {
