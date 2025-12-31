@@ -18,7 +18,7 @@ class Outfit2Screen implements Screen {
       video.stop();  //para a reprodução do vídeo
 
       //passa para o ecrã seguinte
-      currentScreen = new WakeUpChoiceScreen(frames[2]);  //usa o frame correspondente carregado na main
+      currentScreen = new WakeUpChoiceScreen(frames[0]);  //usa o frame correspondente carregado na main
     }
   }
 

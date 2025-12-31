@@ -18,7 +18,7 @@ class Outfit1Screen implements Screen {
       video.stop();  //para a reprodução do vídeo
 
       //passa para o ecrã seguinte
-      currentScreen = new WakeUpChoiceScreen(frames[1]);  //usa o frame correspondente carregado na main
+      currentScreen = new O1Choice1Screen(frames[1]);  //usa o frame correspondente carregado na main
     }
   }
 
