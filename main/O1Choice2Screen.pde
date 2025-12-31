@@ -16,7 +16,7 @@ class O1Choice2Screen implements Screen {
 
     // criar os 2 botões (esquerda e direita do centro)
     buttons[0] = new Button(bx - spacing / 2, by, bw, bh, "Devolver a carteira");  // botão 1
-    buttons[1] = new Button(bx + spacing / 2, by, bw, bh, "Devolver a carteira (roubar o dinheiro)");  // botão 2
+    buttons[1] = new Button(bx + spacing / 2, by, bw, bh, "Roubar o dinheiro e devolver");  // botão 2
   }
 
   public void update() {

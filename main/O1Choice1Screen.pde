@@ -15,8 +15,8 @@ class O1Choice1Screen implements Screen {
     float spacing = bw + 24;  // spacing entre botões
 
     // criar os 2 botões (esquerda e direita do centro)
-    buttons[0] = new Button(bx - spacing / 2, by, bw, bh, "Abrir a porta");  // botão 1
-    buttons[1] = new Button(bx + spacing / 2, by, bw, bh, "Deixar que os outros abram");  // botão 2
+    buttons[0] = new Button(bx - spacing / 2, by, bw, bh, "Deixar Entrar");  // botão 1
+    buttons[1] = new Button(bx + spacing / 2, by, bw, bh, "Entrar em Primeiro");  // botão 2
   }
 
   public void update() {

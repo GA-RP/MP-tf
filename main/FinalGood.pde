@@ -18,12 +18,12 @@ class FinalGood implements Screen {
       video.stop();  //para a reprodução do vídeo
 
       //passa para o ecrã seguinte
-      //currentScreen = new Credits();
+      currentScreen = new Creditos();
     }
   }
 
   public void display() {
-    background(0, 255, 0);  //ecrã com fundo preto - MUDAR DEPOIS
+    background(0);  //ecrã com fundo preto
 
     float vw = video.width;  //dimensões originais do vídeo, largura
     float vh = video.height;  //dimensões originais do vídeo, altura

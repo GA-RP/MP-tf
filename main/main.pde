@@ -9,8 +9,8 @@ PImage[] frames = new PImage[5];  //guarda as 5 imagens (frames) usadas como fun
 Movie[] videos = new Movie[14];  //guarda os 14 vídeos usados nas cenas
 
 void setup() {
-  //fullScreen();  //adaptar ao tamanho do próprio monitor
-  size(1280, 720); //tamanho temporário
+  fullScreen();  //adaptar ao tamanho do próprio monitor
+  //size(1280, 720); //tamanho temporário
   alarmSound = new SoundFile(this, "alarm_clock.mp3"); //ficheiro de áudio alarm_clock relativo ao alarm do first screen
 
   //carregar frames respetivos ao array, todos dentro da pasta data/
