@@ -79,7 +79,7 @@ class BootScreen implements Screen {
   }
 
   //gera uma posição aleatória segura para o texto (dentro de uma margem do canva)
-  void randomizeOptionPos() {
+  public void randomizeOptionPos() {
     //margens para evitar que o texto fique demasiado perto das bordas
     float marginX = width * 0.18; //margem horizontal
     float marginY = height * 0.18; //margem vertical
