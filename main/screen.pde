@@ -12,7 +12,6 @@ interface Screen {
   void handleMousePressed();
 }
 
-
 //ORGANIZAÇÃO
 
 //main
@@ -49,9 +48,3 @@ interface Screen {
 //GUILHERME ANDRADE - A045395
 
 //RODRIGO PEDRA - A042419
-
-//--------------------------------
-
-//A FALTAR
-
-//adicionar os créditos a seguir aos FinalGood e FinalBad
