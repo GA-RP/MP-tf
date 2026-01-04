@@ -41,17 +41,17 @@ class WakeUpChoiceScreen implements Screen {
 
     //se clicar no botão 1
     if (buttons[0].isClicked()) {
-      currentScreen = new Outfit1Screen(videos[1]);  // opção 1
+      currentScreen = new VideosScreen(videos[1], new O1Choice1Screen(frames[1]));  // opção 1
     }
 
     //se clicar no botão 2
     if (buttons[1].isClicked()) {
-      currentScreen = new Outfit2Screen(videos[11]);  // opção 2
+      currentScreen = new VideosScreen(videos[11], new WakeUpChoiceScreen(frames[0]));  // opção 2
     }
 
     //se clicar no botão 3
     if (buttons[2].isClicked()) {
-      currentScreen = new Outfit3Screen(videos[6]);  // opção 3
+      currentScreen = new VideosScreen(videos[6], new O3Choice1Screen(frames[3])); // opção 3
     }
   }
 }  //c

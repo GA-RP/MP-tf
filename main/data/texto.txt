@@ -3,10 +3,11 @@ Trabalho realizado por:
 
 
 Guilherme Andrade
-
+A045395
 
 
 Rodrigo Pedra
+A042419
 
 
 
@@ -14,16 +15,15 @@ Rodrigo Pedra
 
 
 
-Maiêutica
+TCM
 
+
+CADEIRA
+Programação Multimédia
+
+
+DOCENTE
+Prof. Tiago Cruz
 
 
 Universidade da Maia
-
-
-
-Tecnologias de Comunicação Multimédia
-
-
-
-Programação Multimédia

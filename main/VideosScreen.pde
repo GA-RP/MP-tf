@@ -1,15 +1,27 @@
-//class O1_3Screen que implementa a interface Screen
-class O1_3Screen implements Screen {
+//class VideosScreen que implementa a interface Screen
+class VideosScreen implements Screen {
 
   Movie video;  //variável do vídeo a ser reproduzido neste ecrã
-  boolean finished = false;  //variável relativa ao estado do vídeo (se terminou ou não)
+  Screen nextScreen;  // variavel do ecrã para onde navegar a seguir
+  boolean started = false;  // estado do vídeo (se começou ou não)
+  boolean finished = false;  // estado do vídeo (se terminou ou não)
 
-  O1_3Screen(Movie video) {  //construtor recebe o vídeo a reproduzir
+  VideosScreen(Movie video, Screen nextScreen) { //construtor recebe o vídeo a reproduzir e o ecrâ atual
     this.video = video;  //guarda a referência ao vídeo
-    video.play();  //inicia a reprodução do vídeo
+    this.nextScreen = nextScreen;  //guarda o ecrã seguinte
   }
 
+  //garantir que o video apenas roda 1x
+  void startVideoOnce() {
+    if (started) return;  //se o video começou, não faz nada
+    started = true;  //marca o video como iniciado
+
+    video.play();  //inicia a reprodução
+  }
+  
   public void update() {
+    startVideoOnce();
+
     //verifica se o vídeo já terminou
     //duration() -> duração total do vídeo
     //time() -> tempo atual de reprodução
@@ -17,8 +29,7 @@ class O1_3Screen implements Screen {
       finished = true;  //marca o estado do vídeo como terminado
       video.stop();  //para a reprodução do vídeo
 
-      //passa para o ecrã seguinte
-      currentScreen = new FinalGood(videos[12]);  //usa o frame correspondente carregado na main
+      currentScreen = nextScreen;  //passa para o ecrã seguinte
     }
   }
 
@@ -34,7 +45,7 @@ class O1_3Screen implements Screen {
     float scaleW = width / vw;  //escala necessária para preencher o ecrã na horizontal
     float scaleH = height / vh;  //escala necessária para preencher o ecrã na vertical
     float scaleFinal = max(scaleW, scaleH); //escolhe a maior escala para ocupar o ecrã todo mantendo a proporção
-    
+
     //dimensões finais do vídeo no ecrã
     float drawW = vw * scaleFinal;  //largura final do vídeo no canvas (com a escala aplicada)
     float drawH = vh * scaleFinal;  //altura final do vídeo no canvas (com a escala aplicada)
@@ -49,4 +60,4 @@ class O1_3Screen implements Screen {
   public void handleMousePressed() {
     //não faz nada neste ecrã
   }
-} //c
+}

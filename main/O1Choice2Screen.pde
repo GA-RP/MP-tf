@@ -40,12 +40,12 @@ class O1Choice2Screen implements Screen {
 
     //se clicar no botão 1
     if (buttons[0].isClicked()) {
-      currentScreen = new O1_3Screen(videos[4]);  // opção 1
+      currentScreen = new VideosScreen(videos[4], new VideosScreen(videos[12], new Creditos()));  // opção 1
     }
 
     //se clicar no botão 2
     if (buttons[1].isClicked()) {
-      currentScreen = new O1_4Screen(videos[5]);  // opção 2
+      currentScreen = new VideosScreen(videos[5], new VideosScreen(videos[13], new Creditos()));  // opção 2
     }
   }
 } //c
