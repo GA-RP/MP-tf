@@ -35,10 +35,10 @@ class Button {
 
   // verifica se o mouse(mx, my) está dentro do botão
   boolean isInside(float mx, float my) {
-    if (mx < x - w/2) return false;  // if estiver à esquerda do botão, é falso
-    if (mx > x + w/2) return false;  // if estiver à direita do botão, é falso
-    if (my < y - h/2) return false;  // if estiver acima do botão, é falso
-    if (my > y + h/2) return false;  // if estiver abaixo do botão, é falso
+    if (mx < x - w/2) return false;  // se estiver à esquerda do botão, é falso
+    if (mx > x + w/2) return false;  // se estiver à direita do botão, é falso
+    if (my < y - h/2) return false;  // se estiver acima do botão, é falso
+    if (my > y + h/2) return false;  // se estiver abaixo do botão, é falso
     return true;  // se passar todas as condições, está dentro do botão
   }
 
