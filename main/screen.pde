@@ -1,5 +1,6 @@
 // qualquer class que implemente Screen é obrigada a ter os seguintes métodos.
-// apenas declara o código, não contêm código
+// a interface não contêm código, apenas declara o código na main
+// atualiza os métodos que garantem uma estrutura comum entre todos os ecrãs
 interface Screen {
   
   //update() para atualizar a lógica do ecrã atual
