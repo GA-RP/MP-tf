@@ -1,3 +1,5 @@
+//as bibliotecas usadas são: "Sound 2.4.0 - The Processing Foundation" & "Video Library for Processing 4 2.2.2 - The Processing Foundation"
+//caminho para library manager: [Sketch -> Import Library -> Manage Libraries...]
 import processing.sound.*;  //importar biblioteca do processing "sound"
 import processing.video.*;  //importar biblioteca do processing "video"
 
